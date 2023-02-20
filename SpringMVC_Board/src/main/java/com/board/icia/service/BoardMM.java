@@ -55,4 +55,9 @@ public class BoardMM {
 		}
 			return null;
 	}
+
+	public boolean boardWrite(BoardDto board) {
+		
+		return bDao.boardWrite(board);
+	}
 }

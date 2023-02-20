@@ -22,4 +22,6 @@ public interface IBoardDao {
 
 	boolean reply_insert(ReplyDto reply);
 
+	boolean boardWrite(BoardDto board);
+
 }

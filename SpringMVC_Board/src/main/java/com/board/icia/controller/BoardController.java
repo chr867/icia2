@@ -2,9 +2,12 @@ package com.board.icia.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,8 +23,27 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/board")
 public class BoardController {
-	@Autowired //寃뚯떆�뙋 �꽌鍮꾩뒪 �겢�옒�뒪
+	@Autowired //게시판 서비스 클래스
 	private BoardMM bm;
+	
+	@GetMapping("write")
+	public String write() {
+		return "write";
+	}
+	
+	@PostMapping("write")
+	public ModelAndView write(BoardDto board,HttpSession session) {
+		log.info("board: "+board.toString());
+		board.setB_id(session.getAttribute("id").toString());
+		boolean result=bm.boardWrite(board);
+		if(result) {
+			return new ModelAndView("redirect:/board/list"); //get만
+		}else {
+			return new ModelAndView("redirect:/board/write"); //get만
+		}
+		
+	}
+	
 	
 	@GetMapping("/list")
 	public ModelAndView boardList(@RequestParam(defaultValue = "1") Integer pageNum

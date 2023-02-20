@@ -74,6 +74,12 @@
 		</c:forEach>
 	</table>
 
+<!-- 글쓰기 창 열기 -->
+	<form action="write" method="get">
+		<button>글쓰기</button>
+	</form>
+
+
 	<div align="center">${paging}</div>
 
 	<!-- The Modal -->
