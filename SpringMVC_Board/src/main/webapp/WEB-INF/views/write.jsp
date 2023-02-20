@@ -14,7 +14,7 @@
 		<form method="post" action="write" method="post"
 			enctype="multipart/form-data">
 			<input type="text" name="b_title" style="width: 40%;"
-				placeholder="力格" /> <br>
+				placeholder="力格"/> <br>
 			<br>
 			<textarea id="summernote" name="b_contents"></textarea>
 			<br>
