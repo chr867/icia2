@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.icia.dto.BoardDto;
@@ -32,16 +33,18 @@ public class BoardController {
 	}
 	
 	@PostMapping("write")
-	public ModelAndView write(BoardDto board,HttpSession session) {
+	public ModelAndView write(BoardDto board,List<MultipartFile> files,HttpSession session) {
 		log.info("board: "+board.toString());
-		board.setB_id(session.getAttribute("id").toString());
-		boolean result=bm.boardWrite(board);
-		if(result) {
-			return new ModelAndView("redirect:/board/list"); //get만
-		}else {
-			return new ModelAndView("redirect:/board/write"); //get만
-		}
-		
+		log.info("files: "+files.toString());
+		log.info(files.get(1).toString());
+		return null;
+		/*
+		 * board.setB_id(session.getAttribute("id").toString()); boolean
+		 * result=bm.boardWrite(board);
+		 * 
+		 * if(result) { return new ModelAndView("redirect:/board/list"); //get만 }else {
+		 * return new ModelAndView("redirect:/board/write"); //get만 }
+		 */
 	}
 	
 	

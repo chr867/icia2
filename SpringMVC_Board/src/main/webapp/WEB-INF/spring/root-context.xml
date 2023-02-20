@@ -27,4 +27,10 @@
 	<!-- <bean id="tpl" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean> -->
+	<!--파일 업로드 설정  -->
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="maxUploadSize" value="10000000" /> <!-- 10MB -->
+		<property name="maxInMemorySize" value="10000000" /><!-- 10MB -->
+	</bean>
 </beans>
