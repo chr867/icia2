@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 1. parameterType 1번만 사용, 생략가능 -->
+<!-- 2. select태그만 resultType 명시 해야함.-->
+<!-- 3. #{변수},#{필드명},#{key}-->
+
+<!-- IMemberDao 전용 Mapper: 회원관련 sql -->
+<!-- <mapper namespace="com.board.icia.dao.IMemberDao"> -->
+<mapper namespace="com.board.icia.dao.IMemberDao">
+	<select id="access" parameterType="member" resultType="boolean">
+		SELECT COUNT(*) FROM MEMBER WHERE M_ID=#{m_id} AND M_PW=#{m_pw}
+	</select>
+	<insert id="join" parameterType="member" >
+		INSERT INTO M VALUES(#{m_id},#{m_pw},#{m_name},#{m_birth},#{m_addr},#{m_phone},default)
+	</insert>
+	<select id="getSecurityPw" parameterType="String" resultType="String">
+		SELECT M_PW FROM MEMBER WHERE M_ID=#{m_id}
+	</select>
+	<select id="getMemberInfo" parameterType="String" resultType="Member">
+		SELECT * FROM MINFO WHERE M_ID=#{m_id}
+	</select>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 1. parameterType 1번만 사용, 생략가능 -->
+<!-- 2. select태그만 resultType 명시 해야함. -->
+<!-- 3. #{변수},#{필드명},#{key} : 문자열 일 때 '' 를 포함 -->
+<!-- 3.2 ${변수},${필드명},${key} : 문자열 일 때 '' 없이 -->
+<!-- 4. 리스트 반환시 리스트요소 타입만 명시 -->
+<!-- IBoardDao 전용 Mapper: 게시판관련 sql -->
+<mapper namespace="com.board.icia.dao.IBoardDao">
+	<select id="getBoardList" parameterType="Integer"
+		resultType="board">
+		<!-- <![CDATA[ SELECT * FROM NEW_BLIST WHERE RN >= #{pageNum}*10-9 AND 
+			RN <= #{pageNum}*10 ]]> -->
+
+		<!-- 속도 개선 ver -->
+		<!-- /*+INDEX_DESC(B PK_B_NUM)*/ : 인덱스를 타고 내림차순 검색 -->
+		<!-- From BOARD B 라면 힌트에 B를 써야 힌트를 이용한다. -->
+		<!-- 서브쿼리에서 WHERE가 SELECT보다 먼저처리되므로 RN별칭 쓰면 안됨 -->
+		<![CDATA[
+		 SELECT * FROM 
+		 	(
+		    SELECT /*+INDEX_DESC(B PK_B_NUM)*/  ROWNUM RN, B.*
+		    FROM B
+		    WHERE ROWNUM<=#{pageNum}*10
+		    )
+		 WHERE RN>=#{pageNum}*10-9   
+		]]>
+	</select>
+
+	<select id="getnContents" parameterType="Integer"
+		resultType="board">
+		SELECT * FROM BOARD WHERE B_NUM=#{b_num}
+	</select>
+
+	<update id="updateViews" parameterType="Integer">
+		UPDATE BOARD SET B_VIEWS=B_VIEWS+1 where B_NUM=#{b_num}
+	</update>
+
+	<select id="getReplyList" resultType="reply">
+		<!-- SELECT * FROM NEW_RLIST WHERE R_BNUM=#{b_num} -->
+		SELECT R_NUM,R_BNUM, R_CONTENTES, R_ID, TO_CHAR(R_DATE,'YYYY-MM-DD,HH:MI:SS') AS R_DATE
+		FROM R 
+		WHERE R_BNUM=#{b_num}
+		ORDER BY R_DATE DESC
+	</select>
+	
+	<insert id="reply_insert" parameterType="reply">
+		INSERT INTO REPLY VALUES(REPLY_SEQ.NEXTVAL,#{r_bnum},#{r_contentes},#{r_id},DEFAULT)
+	</insert>
+</mapper>
