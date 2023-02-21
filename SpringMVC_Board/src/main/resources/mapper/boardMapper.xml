@@ -54,5 +54,16 @@
 		INSERT INTO BOARD VALUES(B_SEQ.NEXTVAL,#{b_title},#{b_contents},#{b_id},DEFAULT,DEFAULT)
 	</insert>
 	
+	<insert id="boardWriteSelectKey" useGeneratedKeys="true" keyProperty="b_num">
+		INSERT INTO B VALUES(#{b_num},#{b_title},#{b_contents},#{b_id},DEFAULT,DEFAULT)
+	
+		<selectKey keyProperty="b_num" resultType="Integer" order="BEFORE">
+		SELECT B_SEQ.NEXTVAL FROM DUAL
+		</selectKey>	
+<!-- 		<selectKey keyProperty="b_num" resultType="Integer" order="AFTER">
+		SELECT B_NUM FORM BOARD WHERE B_NUM=B_SEQ.CURRVAL
+		</selectKey>	
+ -->	</insert>
+	
 	
 </mapper>

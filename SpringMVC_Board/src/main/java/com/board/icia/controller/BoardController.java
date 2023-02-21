@@ -50,13 +50,14 @@ public class BoardController {
 	
 //	첨부파일, 게시판 데이터와 request 객체 정보를 한꺼번에 받음
 	@PostMapping("write")
-	public ModelAndView write(ModelAndView model,MultipartHttpServletRequest multi) {
+	public ModelAndView write(MultipartHttpServletRequest multi) {
 //		BoardDto board=new BoardDto();
 //		board.setB_contents(multi.getParameter("b_contents"));
 //		board.setB_title(multi.getParameter("b_title"));
 //		log.info("board: "+board);
 //		List<MultipartFile> attachments = multi.getFiles("attachments");
 //		log.info("files: "+attachments);
+		
 		boolean result = bm.boardWrite(multi);
 		if(result) {
 			return new ModelAndView("redirect:/board/list");

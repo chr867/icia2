@@ -1,6 +1,7 @@
 package com.board.icia.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +27,9 @@ public interface IBoardDao {
 
 	boolean boardWrite(BoardDto board);
 
-//	boolean boardWrite(List<MultipartFile> multi);
+	boolean boardWriteSelectKey(BoardDto board);
+
+	boolean fileInsert(Map<String, String> fMap);
+
 
 }
