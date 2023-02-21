@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <!-- summernote css/js -->
-<link rel="stylesheet" href="/css/summernote-lite.css">
-<script src="/js/summernote-lite.js"></script>
-<script src="/js/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="/resources/css/summernote-lite.css">
+<script src="/resources/js/summernote-lite.js"></script>
+<script src="/resources/js/summernote-ko-KR.js"></script>
 <script>
 	$(()=>{
 		$('#summernote').summernote({
@@ -34,7 +34,7 @@
 			<br>
 			<textarea id="summernote" name="b_contents"></textarea>
 			<br>
-			파일첨부:<input type="file" name="files" id="files" multiple> 
+			파일첨부:<input type="file" name="attachments" id="attachments" multiple> 
 			<input	type="hidden" id="fileCheck" name="fileCheck" value="0"> 
 			<input	id="subBtn" type="button" value="글 작성"	onclick="goWrite(this.form)" />
 			<input id="reset" type="reset"	value="취소"> 

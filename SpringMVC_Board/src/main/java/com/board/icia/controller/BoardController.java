@@ -33,10 +33,10 @@ public class BoardController {
 	}
 	
 	@PostMapping("write")
-	public ModelAndView write(BoardDto board,List<MultipartFile> files,HttpSession session) {
+	public ModelAndView write(BoardDto board,List<MultipartFile> attachments,HttpSession session) {
 		log.info("board: "+board.toString());
-		log.info("files: "+files.toString());
-		log.info(files.get(1).toString());
+		log.info("files: "+attachments.toString());
+//		log.info(files.get(1).toString());
 		return null;
 		/*
 		 * board.setB_id(session.getAttribute("id").toString()); boolean
@@ -63,7 +63,7 @@ public class BoardController {
 			.addObject("member", member) 
 			.addObject("paging",pageHtml);
 		////jstl활용
-				//.addObject("json", json);
+		//.addObject("json", json);
 //		log.info(bList.toString());
 		//return "boardList";
 	}

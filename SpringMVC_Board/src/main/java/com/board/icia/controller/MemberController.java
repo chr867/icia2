@@ -36,12 +36,12 @@ public class MemberController {
 //	@GetMapping("/") @PostMapping("/")
 	@RequestMapping(value = "/")
 	public String home(HttpServletRequest req,HttpSession session) {
-		Enumeration<String> header_list = req.getHeaderNames(); 
-		while (header_list.hasMoreElements()) {
-			System.out.println(req.getHeader(header_list.nextElement()));
-		}
+//		Enumeration<String> header_list = req.getHeaderNames(); 
+//		while (header_list.hasMoreElements()) {
+//			System.out.println(req.getHeader(header_list.nextElement()));
+//		}
 		String refer = req.getHeader("refer"); 
-		System.out.println("refer:"+refer);
+//		System.out.println("refer:"+refer);
 		if(refer!=null) {
 			session.setAttribute("refer", refer);
 		}

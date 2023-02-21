@@ -16,9 +16,10 @@ public class SessionInterCeptor implements HandlerInterceptor{
 		HttpSession session=request.getSession();
 		if(session.getAttribute("id")==null){
 			System.out.println("비 로그인 상태");
+			System.out.println("===========");
 			response.sendRedirect("/member/");
 			return false;
-		};
+		}
 		return true;
 	}
 	

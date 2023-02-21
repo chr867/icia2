@@ -14,10 +14,10 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<!-- front 리소스 위치: webapp아래 resources 폴더 -->
-	<!-- <resources mapping="/resources/**" location="/resources/" />
-	 -->
+	<resources mapping="/resources/**" location="/resources/" />
+	 
 	 <!-- webapp폴더에 직접 js, css, upload 등 리소스 저장 가능 -->
-	<default-servlet-handler/>
+	<!-- <default-servlet-handler/> -->
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -36,6 +36,8 @@
 			<exclude-mapping path="/member/access"/>
 			<exclude-mapping path="/member/join"/>
 			<exclude-mapping path="/board/list"/>
+			<exclude-mapping path="/board/write"/>
+			<exclude-mapping path="/resources/**"/>
 			<beans:bean class="com.board.icia.userClass.SessionInterCeptor"/>
 		</interceptor>
 		

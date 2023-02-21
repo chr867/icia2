@@ -57,7 +57,6 @@ public class BoardMM {
 	}
 
 	public boolean boardWrite(BoardDto board) {
-		
 		return bDao.boardWrite(board);
 	}
 }
