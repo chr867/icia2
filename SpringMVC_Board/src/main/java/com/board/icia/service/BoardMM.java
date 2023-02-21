@@ -77,16 +77,17 @@ public class BoardMM {
 		List<MultipartFile> attachments = multi.getFiles("attachments");
 		int filecheck=attachments.size(); //첨부되면 1>=
 		BoardDto board=new BoardDto();
+		board.setB_id(multi.getSession().getAttribute("id").toString());
 		board.setB_title(title).setB_contents(contents);
 		boolean result=bDao.boardWriteSelectKey(board); //글번호 100을 게시 후 글번호를 가져옴
-//		multi.setAttribute("id",);
+		System.out.println("board="+board);
 		if(result) { //글쓰기 성공 -> 파일 업로드
 			if(filecheck>=1) {
 				if(fM.fileUp(multi,board.getB_num()));
 				System.out.println("upload OK");
-				return true;
+				return true; //첨부+글쓰기 성공
 			}
-			return true;
+			return true; //첨부없이 글쓰기 성공
 		}
 		return false;
 	}

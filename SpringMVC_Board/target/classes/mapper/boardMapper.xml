@@ -54,6 +54,8 @@
 		INSERT INTO BOARD VALUES(B_SEQ.NEXTVAL,#{b_title},#{b_contents},#{b_id},DEFAULT,DEFAULT)
 	</insert>
 	
+	<!-- useGeneratedKeys="true" 자동증가값을 얻을 수 있다.
+		 keyProperty="b_num"(필드명) 오라클은 생략가능,my-sql은 명시할 것 -->
 	<insert id="boardWriteSelectKey" useGeneratedKeys="true" keyProperty="b_num">
 		INSERT INTO B VALUES(#{b_num},#{b_title},#{b_contents},#{b_id},DEFAULT,DEFAULT)
 	
