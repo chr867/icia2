@@ -3,6 +3,8 @@ package com.board.icia.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.board.icia.dto.BoardDto;
 import com.board.icia.dto.ReplyDto;
@@ -23,5 +25,7 @@ public interface IBoardDao {
 	boolean reply_insert(ReplyDto reply);
 
 	boolean boardWrite(BoardDto board);
+
+//	boolean boardWrite(List<MultipartFile> multi);
 
 }

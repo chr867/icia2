@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.board.icia.dao.IBoardDao;
 import com.board.icia.dto.BoardDto;
@@ -58,5 +60,14 @@ public class BoardMM {
 
 	public boolean boardWrite(BoardDto board) {
 		return bDao.boardWrite(board);
+	}
+
+	public boolean boardWrite(MultipartHttpServletRequest multi) {
+		//1개 file tag에 여러개의 파일을 첨부할 때
+		List<MultipartFile> attachments = multi.getFiles("attachments");
+		for(MultipartFile file : attachments) {
+			System.out.println("file name="+file.getOriginalFilename());
+		}
+		return false;
 	}
 }
