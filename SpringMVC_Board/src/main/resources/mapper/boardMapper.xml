@@ -67,5 +67,9 @@
 		</selectKey>	
  -->	</insert>
 	
+	<insert id="fileInsert" parameterType="Map">
+		INSERT INTO BF VALUES(BF_SEQ.NEXTVAL, #{bnum}, #{origFileName}, #{sysFileName})
+	</insert>
+	
 	
 </mapper>

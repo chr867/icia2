@@ -41,7 +41,16 @@
 		</form>
 	</div>
 	<script>
+	$('#reset').on('click',()=>$('#fileCheck').val(0))
 	
+	$('#attachments').change(function(){
+//		console.dir(this.value) /file 엘리먼트
+		if($(this).val()=='') //파일 선택 취소
+			$('#fileCheck').val(0)
+		else $('#fileCheck').val(1)
+		console.log($('#fileCheck').val())
+	})
+		
 	function goWrite(frm){
 		const title = frm.b_title.value
 		const contents = frm.b_contents.value

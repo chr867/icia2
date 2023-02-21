@@ -28,7 +28,7 @@ public class BoardController {
 	@Autowired //게시판 서비스 클래스
 	private BoardMM bm;
 	
-	@GetMapping("write")
+	@GetMapping("/write")
 	public String write() {
 		return "write";
 	}
@@ -49,8 +49,8 @@ public class BoardController {
 //	}
 	
 //	첨부파일, 게시판 데이터와 request 객체 정보를 한꺼번에 받음
-	@PostMapping("write")
-	public ModelAndView write(MultipartHttpServletRequest multi) {
+	@PostMapping("/write")
+	public ModelAndView write(MultipartHttpServletRequest multi, Integer fileCheck) {
 //		BoardDto board=new BoardDto();
 //		board.setB_contents(multi.getParameter("b_contents"));
 //		board.setB_title(multi.getParameter("b_title"));
@@ -58,7 +58,7 @@ public class BoardController {
 //		List<MultipartFile> attachments = multi.getFiles("attachments");
 //		log.info("files: "+attachments);
 		
-		boolean result = bm.boardWrite(multi);
+		boolean result = bm.boardWrite(multi,fileCheck);
 		if(result) {
 			return new ModelAndView("redirect:/board/list");
 		}else {

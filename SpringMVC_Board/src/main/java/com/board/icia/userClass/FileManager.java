@@ -35,7 +35,7 @@ public class FileManager {
 	
 	// 파일 경로(다운로드/삭제에서 사용)
 //	String fullPath = "C:/work/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC_Board/";
-	String fullPath = "D:/Spring/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC_Board";
+	String fullPath = "D:/Spring/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC_Board/";
 
 	public boolean fileUp(MultipartHttpServletRequest multi, int bnum) {
 		System.out.println("fileUp");
@@ -43,65 +43,63 @@ public class FileManager {
 		String root = multi.getSession().getServletContext().getRealPath("/");
 		System.out.println("root=" + root);
 		String path = root + "resources/upload/";
-		return false;
+		
 		// 2.폴더 생성을 꼭 할것...
-//		File dir = new File(path);
-//		if (!dir.isDirectory()) { // upload폴더 없다면
-//			dir.mkdir(); // upload폴더 생성
-//		}
-//
-//		// 3.파일을 가져오기-파일태그가 여러개 일때 이름들 반환
-////		  Iterator<String> files=multi.getFileNames(); //파일태그가 2개이상일때
-////		  
-////		  Map<String,String> fMap=new HashMap<String, String>();
-////		  fMap.put("bnum", String.valueOf(bnum));
-////		  boolean f=false;
-////		  while(files.hasNext()){
-////			  String fileTagName=files.next();
-////			  System.out.println("fileTag="+fileTagName); //파일  메모리에 저장 
-////			  MultipartFile mf=multi.getFile(fileTagName); //실제파일 
-////			  String oriFileName=mf.getOriginalFilename(); //a.txt 
-////			  fMap.put("oriFileName", oriFileName); //4.시스템파일이름 생성 a.txt ==>112323242424.txt
-////			  String sysFileName=System.currentTimeMillis()+"."
-////			            +oriFileName.substring(oriFileName.lastIndexOf(".")+1);
-////			  fMap.put("sysFileName", sysFileName);
-////			  
-////		  }
-//
-//		// 3.파일을 가져오기-파일태그가 1개 일때
-//		Map<String, String> fMap = new HashMap<String, String>();
-//		fMap.put("bnum", String.valueOf(bnum));
-//		List<MultipartFile> fList = multi.getFiles("files");
-//		System.out.println("size:"+fList.size());
-//		boolean f = false;
-//		for (int i = 0; i < fList.size(); i++) {
-//			// 파일 메모리에 저장
-//			MultipartFile mf = fList.get(i); // 실제파일
-//			String oriFileName = mf.getOriginalFilename(); // a.txt
-//			//summernote 에디터에 이미지첨부없이 파일태그만 첨부하면 리스트의 첫파일은 빈문자열("")로 저장된다. 
-//			if(oriFileName=="") {
-//				continue;
-//			}
-//			System.out.println("오리파일:"+oriFileName);
-//			fMap.put("oriFileName", oriFileName);
-//			// 4.시스템파일이름 생성 a.txt ==>112323242424.txt
-//			String sysFileName = System.currentTimeMillis() + "."
-//					+ oriFileName.substring(oriFileName.lastIndexOf(".") + 1);
-//			System.out.println("리얼파일:"+sysFileName);
-//			fMap.put("sysFileName", sysFileName);
-//			// 5.메모리->실제 파일 업로드
-//			try {
-//				mf.transferTo(new File(path + sysFileName)); // 서버upload에 파일 저장
-//				f = bDao.fileInsert(fMap);
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		} // For end
-//		if (f)
-//			return true;
-//		return false;
-	}
+		File dir = new File(path);
+		if (!dir.isDirectory()) { // upload폴더 없다면
+			dir.mkdir(); // upload폴더 생성
+		}
+
+		// 3.파일을 가져오기-파일태그가 여러개 일때 이름들 반환
+//		  Iterator<String> files=multi.getFileNames(); //파일태그가 2개이상일때
+//		  
+//		  Map<String,String> fMap=new HashMap<String, String>();
+//		  fMap.put("bnum", String.valueOf(bnum));
+//		  boolean f=false;
+//		  while(files.hasNext()){
+//			  String fileTagName=files.next();
+//			  System.out.println("fileTag="+fileTagName); //파일  메모리에 저장 
+//			  MultipartFile mf=multi.getFile(fileTagName); //실제파일 
+//			  String oriFileName=mf.getOriginalFilename(); //a.txt 
+//			  fMap.put("oriFileName", oriFileName); //4.시스템파일이름 생성 a.txt ==>112323242424.txt
+//			  String sysFileName=System.currentTimeMillis()+"."
+//			            +oriFileName.substring(oriFileName.lastIndexOf(".")+1);
+//			  fMap.put("sysFileName", sysFileName);
+//			  
+//		  }
+
+		// 3.파일을 가져오기-파일태그가 1개 일때
+		Map<String, String> fMap = new HashMap<String, String>();
+		fMap.put("bnum", String.valueOf(bnum));
+		List<MultipartFile> fList = multi.getFiles("attachments");
+		System.out.println("size:"+fList.size());
+		boolean f = false;
+		for (int i = 0; i < fList.size(); i++) {
+			// 파일 메모리에 저장
+			MultipartFile mf = fList.get(i); // 실제파일
+			String origFileName = mf.getOriginalFilename(); // a.txt
+			System.out.println("원조 파일:"+origFileName);
+			fMap.put("origFileName", origFileName);
+		  
+			// 4.시스템파일이름 생성 a.txt ==>112323242424.txt
+			String sysFileName = System.currentTimeMillis() + "." //다운
+					+ origFileName.substring(origFileName.lastIndexOf(".") + 1);
+			System.out.println("서버파일:"+sysFileName);
+			fMap.put("sysFileName", sysFileName);
+			// 5.메모리->실제 파일 업로드
+			try {
+				mf.transferTo(new File(path + sysFileName)); // 서버upload에 파일 저장
+				f=bDao.fileInsert(fMap);
+				if(f==false) break;
+			} catch (IOException e) {
+				System.out.println("파일 DB삽입 예외 발생");
+				e.printStackTrace();
+				f=false;
+				break;
+			}
+		} // For end
+		return f;
+	}//fileup end
 
 	// 파일 다운로드
 	public void download(String fullPath, String oriFileName, HttpServletResponse resp) throws Exception {

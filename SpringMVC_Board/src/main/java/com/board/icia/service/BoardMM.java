@@ -67,22 +67,20 @@ public class BoardMM {
 		return bDao.boardWrite(board);
 	}
 
-	public boolean boardWrite(MultipartHttpServletRequest multi) {
+	public boolean boardWrite(MultipartHttpServletRequest multi, Integer fileCheck) {
 //1개 file tag에 여러개의 파일을 첨부할 때
 //		for(MultipartFile file : attachments) {
 //			System.out.println("file name="+file.getOriginalFilename());
 //		}
+		String id=multi.getSession().getAttribute("id").toString();
 		String title=multi.getParameter("b_title");
 		String contents=multi.getParameter("b_contents");
-		List<MultipartFile> attachments = multi.getFiles("attachments");
-		int filecheck=attachments.size(); //첨부되면 1>=
 		BoardDto board=new BoardDto();
-		board.setB_id(multi.getSession().getAttribute("id").toString());
-		board.setB_title(title).setB_contents(contents);
+		board.setB_title(title).setB_contents(contents).setB_id(id);
 		boolean result=bDao.boardWriteSelectKey(board); //글번호 100을 게시 후 글번호를 가져옴
 		System.out.println("board="+board);
 		if(result) { //글쓰기 성공 -> 파일 업로드
-			if(filecheck>=1) {
+			if(fileCheck==1) {
 				if(fM.fileUp(multi,board.getB_num()));
 				System.out.println("upload OK");
 				return true; //첨부+글쓰기 성공
