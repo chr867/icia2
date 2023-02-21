@@ -11,7 +11,23 @@
 <!-- <script src="https://code.jquery.com/jquery-3.6.3.js"
 	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
 	crossorigin="anonymous"></script> -->
-	
+<!-- summernote는 jQuery가 필요하지만 부모페이지(boardList)에 이미 로드 -->
+<link rel="stylesheet" href="/resources/css/summernote-lite.css">
+<script src="/resources/js/summernote-lite.js"></script>
+<script src="/resources/js/summernote-ko-KR.js"></script>
+<script>
+	$(()=>{
+		$('#summernote').summernote({
+			  height: 300,                 // 에디터 높이
+			  minHeight: null,             // 최소 높이
+			  maxHeight: null,            // 최대 높이
+			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+			  lang: "ko-KR",					// 한글 설정
+			  placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
+		})
+		$('#summernote').summernote('disable')
+	})
+</script>
 </head>
 <style>
 #rTable td{
@@ -39,7 +55,7 @@
 		</tr>
 		<tr height="30">
 			<td bgcolor="lightgray" align="center">CONTENTS</td>
-			<td colspan="5" ><textarea readonly rows="5" cols="40">${board.b_contents}</textarea></td>
+			<td colspan="5" ><textarea id="summernote" readonly rows="5" cols="40">${board.b_contents}</textarea></td>
 		</tr>
 	</table>
 

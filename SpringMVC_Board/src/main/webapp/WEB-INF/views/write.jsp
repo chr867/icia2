@@ -50,7 +50,7 @@
 		else $('#fileCheck').val(1)
 		console.log($('#fileCheck').val())
 	})
-		
+
 	function goWrite(frm){
 		const title = frm.b_title.value
 		const contents = frm.b_contents.value

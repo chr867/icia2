@@ -80,7 +80,7 @@ public class FileManager {
 			String origFileName = mf.getOriginalFilename(); // a.txt
 			System.out.println("원조 파일:"+origFileName);
 			fMap.put("origFileName", origFileName);
-		  
+		
 			// 4.시스템파일이름 생성 a.txt ==>112323242424.txt
 			String sysFileName = System.currentTimeMillis() + "." //다운
 					+ origFileName.substring(origFileName.lastIndexOf(".") + 1);
