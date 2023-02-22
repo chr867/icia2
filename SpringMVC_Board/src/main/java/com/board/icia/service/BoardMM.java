@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class BoardMM {
+
 	@Autowired
 	private IBoardDao bDao;
 
@@ -110,8 +111,8 @@ public class BoardMM {
 		
 	}
 
-	@Transactional
-	public boolean board_delete(Integer b_num) {
+	@Transactional 
+	public void board_delete(Integer b_num) {
 		String[] bf_list=bDao.get_bf_list(b_num);
 		System.out.println("파일 갯수= "+bf_list.length);		
 		//첨부파일 삭제
@@ -140,7 +141,6 @@ public class BoardMM {
 			fM.delete(bf_list); //서버(롤백 안됨?) 파일 삭제
 			}
 			System.out.println("트랜잭션 성공, commit");
-			return true;
 		}else {
 			System.out.println("트랜잭션 실패, rollback");
 			throw new DBException(); //예외발생시-->rollback

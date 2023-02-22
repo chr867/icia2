@@ -34,9 +34,9 @@ public class BoardController {
 
 	@GetMapping("/delete")
 	public ModelAndView board_delete(Integer b_num,RedirectAttributes attr) {
-		boolean result=false;
+		boolean result=true;
 		try {
-			result=bm.board_delete(b_num);
+			bm.board_delete(b_num);
 		} catch (DBException e) {
 			System.out.println(e);
 			result=false;
