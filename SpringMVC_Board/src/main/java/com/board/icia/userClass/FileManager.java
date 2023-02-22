@@ -90,7 +90,7 @@ public class FileManager {
 			try {
 				mf.transferTo(new File(path + sysFileName)); // 서버upload에 파일 저장
 				f=bDao.fileInsert(fMap);
-				if(f==false) break;
+				if(f=false) break;
 			} catch (IOException e) {
 				System.out.println("파일 DB삽입 예외 발생");
 				e.printStackTrace();
@@ -102,14 +102,14 @@ public class FileManager {
 	}//fileup end
 
 	// 파일 다운로드
-	public void download(String fullPath, String oriFileName, HttpServletResponse resp) throws Exception {
+	public void download(String full_path, String orig_file_name, HttpServletResponse resp) throws Exception {
 
 		// 한글파일 깨짐 방지
-		String downFile = URLEncoder.encode(oriFileName, "UTF-8");
+		String downFile = URLEncoder.encode(orig_file_name, "UTF-8");
 		/* 파일명 뒤에 이상한 문자가 붙는 경우 아래코드를 해결 */
 		// downFile = downFile.replaceAll("\\+", "");
 		// 파일 객체 생성
-		File file = new File(fullPath);
+		File file = new File(full_path);
 
 		// 다운로드 경로 파일을 읽어 들임
 		InputStream is = new FileInputStream(file);

@@ -25,7 +25,7 @@
 </head>
 <body>
 <h1>write.jsp</h1>
-<h2 style="text-align: center;">글 작성</h2>
+<h2 style="text-align: center">글 작성</h2>
 	
 	<div style="width: 60%; margin: auto;">
 		<form method="post" action="write" method="post" enctype="multipart/form-data" >

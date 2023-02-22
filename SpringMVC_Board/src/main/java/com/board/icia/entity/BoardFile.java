@@ -13,6 +13,6 @@ import lombok.experimental.Accessors;
 public class BoardFile {
 	private int bf_num;
 	private int bf_bnum;
-	private String bf_origName;
+	private String bf_origname;
 	private String bf_sysname;
 }

@@ -1,6 +1,9 @@
 package com.board.icia.service;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +48,7 @@ public class BoardMM {
 	public BoardDto getContents(Integer b_num) {
 		bDao.updateViews(b_num);
 		BoardDto board=bDao.getnContents(b_num);
-		//댓글 리스트
+		//댓글 리스트, 첨부파일 리스트
 		
 		return board;
 	}
@@ -88,5 +91,20 @@ public class BoardMM {
 			return true; //첨부없이 글쓰기 성공
 		}
 		return false;
+	}
+
+	public void download(Map<String, Object> params) throws Exception {
+//		다운로드 할 파일 --> 원래 파일명 추출(파라미터로 가져왔으므로 생략)
+//		String orig_file_name=bDao.get_orig_file_name(sys_file_name); 
+		String orig_file_name=(String)params.get("orig_file_name");
+		String sys_file_name=params.get("sys_file_name").toString();
+		String root=params.get("root").toString();
+		String full_path=root+"resources/upload/"+sys_file_name;
+		System.out.println(orig_file_name);
+		System.out.println(sys_file_name);
+		HttpServletResponse res=(HttpServletResponse)params.get("res");
+		FileManager fm=new FileManager();
+		fm.download(full_path, orig_file_name, res);
+		
 	}
 }

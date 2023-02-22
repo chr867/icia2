@@ -6,12 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 폰트어썸 (아이콘) -->
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<!-- 부트스트랩 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
 <!-- <script src="https://code.jquery.com/jquery-3.6.3.js"
 	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
 	crossorigin="anonymous"></script> -->
+	
 <!-- summernote는 jQuery가 필요하지만 부모페이지(boardList)에 이미 로드 -->
+<!-- 써머노트 -->
 <link rel="stylesheet" href="/resources/css/summernote-lite.css">
 <script src="/resources/js/summernote-lite.js"></script>
 <script src="/resources/js/summernote-ko-KR.js"></script>
@@ -28,6 +35,7 @@
 		$('#summernote').summernote('disable')
 	})
 </script>
+
 </head>
 <style>
 #rTable td{
@@ -36,6 +44,10 @@
 </style>
 <body>
 <h3>boardContentsAjax.jsp --글 상세 & 댓글 리스트</h3>
+	<c:if test="${!empty id_check}">
+		<a href="/borad/delete?b_num=${board.b_num}">글 삭제</a>
+	</c:if>
+	<!-- 자바스크립트 div displaye none -->
 <table>
 		<tr height="30">
 			<td width="100" bgcolor="lightgray" align="center">NUM</td>
@@ -56,6 +68,21 @@
 		<tr height="30">
 			<td bgcolor="lightgray" align="center">CONTENTS</td>
 			<td colspan="5" ><textarea id="summernote" readonly rows="5" cols="40">${board.b_contents}</textarea></td>
+		</tr>
+		
+		<tr>
+			<th>첨부파일</th>
+			<td colspan="5">
+				<c:set var="files" value="${board.bf_list}"/>
+				<c:if test="${empty files}">
+					첨부된 파일이 없습니다
+				</c:if>
+				<c:forEach var="file" items="${board.bf_list}">
+					<a href="/board/download?sys_file_name=${file.bf_sysname}&orig_file_name=${file.bf_origname}">
+						<i class='far fa-file' style='font-size:24px'></i>
+					${file.bf_origname}</a> <br/>
+				</c:forEach>
+			</td>
 		</tr>
 	</table>
 

@@ -1,7 +1,11 @@
 package com.board.icia.controller;
 
+import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +31,14 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 	@Autowired //게시판 서비스 클래스
 	private BoardMM bm;
+	
+	@GetMapping("/download")
+	public void download(@RequestParam Map<String,Object> params,
+		HttpServletRequest req, HttpServletResponse res) throws Exception{
+		params.put("root", req.getSession().getServletContext().getRealPath("/"));
+		params.put("res", res);
+		bm.download(params);
+	}
 	
 	@GetMapping("/write")
 	public String write() {

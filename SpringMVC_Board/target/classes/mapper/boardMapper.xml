@@ -21,7 +21,8 @@
 		<![CDATA[
 		 SELECT * FROM 
 		 	(
-		    SELECT /*+INDEX_DESC(B PK_B_NUM)*/  ROWNUM RN, B.*
+		    SELECT /*+INDEX_DESC(B PK_B_NUM)*/  
+		    ROWNUM RN, B.B_NUM, B.B_TITLE, B.B_ID, B.B_DATE, B.B_VIEWS
 		    FROM B
 		    WHERE ROWNUM<=#{pageNum}*10
 		    )
@@ -30,9 +31,31 @@
 	</select>
 
 	<select id="getnContents" parameterType="Integer"
-		resultType="board">
-		SELECT * FROM BOARD WHERE B_NUM=#{b_num}
+		resultMap="map_for_read">
+		SELECT * FROM B LEFT OUTER JOIN BF
+		ON B.B_NUM=BF.BF_BNUM
+		WHERE B_NUM=#{b_num}
 	</select>
+	
+	<resultMap type="board" id="map_for_read">
+		<id column="B_NUM" property="b_num"/>
+		<result column="B_TITLE" property="b_title" />
+		<result column="B_CONTENTS" property="b_contents" 
+		javaType="java.lang.String" jdbcType="NCLOB" />
+		<result column="B_ID" property="b_id" />
+		<result column="B_DATE" property="b_date" />
+		<result column="B_VIEWS" property="b_views" />
+		<!--  -->	
+		<collection property="bf_list" javaType="java.util.ArrayList" 
+		 resultMap="map_for_board_file" />
+	</resultMap>
+		
+	<resultMap type="boardfile" id="map_for_board_file">
+		<id column="BF_NUM" property="bf_num"/>
+		<result column="BF_ORIGNAME" property="bf_origname"/>
+		<result column="BF_SYSNAME" property="bf_sysname"/>
+	</resultMap>
+
 
 	<update id="updateViews" parameterType="Integer">
 		UPDATE BOARD SET B_VIEWS=B_VIEWS+1 where B_NUM=#{b_num}
