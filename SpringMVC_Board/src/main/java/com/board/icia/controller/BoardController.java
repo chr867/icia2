@@ -32,6 +32,13 @@ public class BoardController {
 	@Autowired //게시판 서비스 클래스
 	private BoardMM bm;
 	
+	@GetMapping("/delete")
+	public void delete() {
+		
+	}
+	
+	
+	
 	@GetMapping("/download")
 	public void download(@RequestParam Map<String,Object> params,
 		HttpServletRequest req, HttpServletResponse res) throws Exception{
@@ -99,20 +106,25 @@ public class BoardController {
 		//return "boardList";
 	}
 	
+	@SuppressWarnings("unused")
 	@GetMapping("/contents")
-	public ModelAndView getContents(Integer b_num) {
-		if(b_num==null) { /*최신글 가져오기 */}
+	public ModelAndView getContents(Integer b_num,HttpSession session) {
+		ModelAndView mav=new ModelAndView();	
+		//if(b_num==null) { /*최신글 가져오기 */}
 		log.info("b_num:"+b_num);
-		BoardDto board=bm.getContents(b_num);
-		List<ReplyDto> rList=bm.getReplyList(b_num);
 		
+		BoardDto board=bm.getContents(b_num);
+		if(board.getB_id().equals(session.getAttribute("id").toString())) {
+			mav.addObject("id_check",1); //본인글 확인
+		}
+		List<ReplyDto> rList=bm.getReplyList(b_num);
 		log.info("BM board: "+board);
 		if(board!=null) {
-			return new ModelAndView("boardContentsAjax")
-					.addObject("board",board)
-					.addObject("rList",rList);
+			mav.setViewName("boardContentsAjax");
+			mav.addObject("board",board).addObject("rList",rList);
 		}else {
-			return new ModelAndView("redirect:/board/list"); 
+			mav.setViewName("redirect:/board/list");
 		}
+		return mav;
 	}
 }
