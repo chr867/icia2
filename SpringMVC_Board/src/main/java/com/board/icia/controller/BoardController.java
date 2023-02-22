@@ -1,6 +1,5 @@
 package com.board.icia.controller;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -14,13 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.board.icia.dto.BoardDto;
 import com.board.icia.dto.MemberDto;
 import com.board.icia.dto.ReplyDto;
+import com.board.icia.exception.DBException;
 import com.board.icia.service.BoardMM;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,13 +31,20 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 	@Autowired //게시판 서비스 클래스
 	private BoardMM bm;
-	
+
 	@GetMapping("/delete")
-	public void delete() {
-		
+	public ModelAndView board_delete(Integer b_num,RedirectAttributes attr) {
+		boolean result=false;
+		try {
+			result=bm.board_delete(b_num);
+		} catch (DBException e) {
+			System.out.println(e);
+			result=false;
+		}
+		if(result)
+			attr.addFlashAttribute("b_num",b_num); //세션 영역에 저장 후 1번 사용하면 사라짐
+		return new ModelAndView("redirect:/board/list");
 	}
-	
-	
 	
 	@GetMapping("/download")
 	public void download(@RequestParam Map<String,Object> params,

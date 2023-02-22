@@ -31,5 +31,16 @@ public interface IBoardDao {
 
 	boolean fileInsert(Map<String, String> fMap);
 
+	String[] get_bf_list(Integer b_num);
+
+	
+	boolean delete_bf(Integer b_num);
+
+	boolean reply_delete(Integer b_num);
+
+	int getBoardExist(Integer b_num);
+
+	boolean board_delete();
+
 
 }

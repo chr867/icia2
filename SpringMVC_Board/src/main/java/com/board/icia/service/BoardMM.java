@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.board.icia.dao.IBoardDao;
 import com.board.icia.dto.BoardDto;
 import com.board.icia.dto.ReplyDto;
+import com.board.icia.exception.DBException;
 import com.board.icia.userClass.FileManager;
 import com.board.icia.userClass.Paging;
 
@@ -106,5 +108,42 @@ public class BoardMM {
 		FileManager fm=new FileManager();
 		fm.download(full_path, orig_file_name, res);
 		
+	}
+
+	@Transactional
+	public boolean board_delete(Integer b_num) {
+		String[] bf_list=bDao.get_bf_list(b_num);
+		System.out.println("파일 갯수= "+bf_list.length);		
+		//첨부파일 삭제
+		boolean f=true;
+		if(bf_list.length!=0) {
+			f=bDao.delete_bf(b_num);
+		}
+		System.out.println("file delete result= "+f);
+		//댓글 삭제
+		boolean r=true;
+		List<ReplyDto> r_list=bDao.getReplyList(b_num);
+		if(r_list.size()!=0) {
+			r=bDao.reply_delete(b_num);
+		}
+		System.out.println("reply delete result= "+r);
+		//게시글 삭제
+		boolean b=true;
+		int cnt=bDao.getBoardExist(b_num);
+		if(cnt !=0) {
+			b=bDao.board_delete();
+		}
+		System.out.println("board delete result= "+b);
+		
+		if(f && r && b ) {
+			if(bf_list.length !=0) {
+			fM.delete(bf_list); //서버(롤백 안됨?) 파일 삭제
+			}
+			System.out.println("트랜잭션 성공, commit");
+			return true;
+		}else {
+			System.out.println("트랜잭션 실패, rollback");
+			throw new DBException(); //예외발생시-->rollback
+		}
 	}
 }
