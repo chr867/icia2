@@ -61,7 +61,7 @@
 		</tr>
 		<c:forEach var="board" items="${bList}">
 			<tr height="25">
-				<td align="center">${board.b_num}</td>
+				<td align="center" id="b_num" ></td>
 				<!-- href="#" 페이지 맨위로 이동뒤 이벤트 발생
 				     href="#;" 페이지 현재위치에서 이벤트 발생 -->
 				<td align="center"><a href="#" data-bs-toggle="modal"
@@ -108,6 +108,14 @@
 	<!-- Modal End -->
 	
 <script type="text/javascript">
+	window.onload=function(){
+	console.log(${numbering})
+	console.log($('#b_num'))
+	${numbering}.forEach(number=>{
+		$('#b_num').html(number)
+		console.log(number)
+	}) 
+	}
 	function logout() {
 		$('#logoutFrm').submit();
 	}

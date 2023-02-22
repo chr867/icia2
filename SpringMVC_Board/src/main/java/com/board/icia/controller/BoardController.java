@@ -1,5 +1,6 @@
 package com.board.icia.controller;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.board.icia.dao.IBoardDao;
 import com.board.icia.dto.BoardDto;
 import com.board.icia.dto.MemberDto;
 import com.board.icia.dto.ReplyDto;
@@ -29,6 +31,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/board")
 public class BoardController {
+	@Autowired
+	private IBoardDao bDao;
+	
 	@Autowired //게시판 서비스 클래스
 	private BoardMM bm;
 
@@ -102,11 +107,20 @@ public class BoardController {
 //		log.info("json:{}",json);
 		List<BoardDto> bList=bm.getBoardList(pageNum);
 		String pageHtml=bm.getPaging(pageNum);
-				
 //		new ModelAndView("boardList").addObject("bList",new Gson().toString(bList));
+		
+//		List<Integer> numbering=bDao.get_numbering();
+//		Collections.reverse(numbering);
+//		for(int number : numbering) {
+//			System.out.println(number);
+//		}		
+//		for(BoardDto board : bList) {
+//			board.setB_rownum(number);
+//		}
 		return new ModelAndView("boardList").addObject("bList",bList)
 			.addObject("member", member) 
 			.addObject("paging",pageHtml);
+//			.addObject("numbering",numbering);
 		////jstl활용
 		//.addObject("json", json);
 //		log.info(bList.toString());

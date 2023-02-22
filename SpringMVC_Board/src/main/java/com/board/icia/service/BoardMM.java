@@ -1,5 +1,7 @@
 package com.board.icia.service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -118,7 +120,7 @@ public class BoardMM {
 		//첨부파일 삭제
 		boolean f=true;
 		if(bf_list.length!=0) {
-			f=bDao.delete_bf(b_num);
+			f=bDao.bf_delete(b_num);
 		}
 		System.out.println("file delete result= "+f);
 		//댓글 삭제
@@ -130,10 +132,11 @@ public class BoardMM {
 		System.out.println("reply delete result= "+r);
 		//게시글 삭제
 		boolean b=true;
-		int cnt=bDao.getBoardExist(b_num);
-		if(cnt !=0) {
-			b=bDao.board_delete();
-		}
+		int cnt=bDao.get_board_exist(b_num);
+		if(cnt !=0) 
+			b=bDao.board_delete(b_num);
+		else 
+			b=false;
 		System.out.println("board delete result= "+b);
 		
 		if(f && r && b ) {

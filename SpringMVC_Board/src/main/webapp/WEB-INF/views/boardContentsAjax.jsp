@@ -45,7 +45,7 @@
 <body>
 <h3>boardContentsAjax.jsp --글 상세 & 댓글 리스트</h3>
 	<c:if test="${!empty id_check}">
-		<a href="/borad/delete?b_num=${board.b_num}">글 삭제</a>
+		<a href="/board/delete?b_num=${board.b_num}">글 삭제</a>
 	</c:if>
 	<!-- 자바스크립트 div displaye none -->
 <table>

@@ -24,8 +24,7 @@ public class BoardDto {
 	private String b_id;	//fk
 	private Timestamp b_date;	//오라클 date형,to_char()
 	private int b_views;
-	
 //	List<MultipartFile> attachments;
 	private List<BoardFile> bf_list;
-
+//	private int b_rownum;
 }
