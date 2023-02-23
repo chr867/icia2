@@ -21,4 +21,23 @@
 	<select id="getMemberInfo" parameterType="String" resultType="Member">
 		SELECT * FROM MINFO WHERE M_ID=#{m_id}
 	</select>
+	
+	<select id="test_map" parameterType="Map" resultType="Map">
+		SELECT M_ID "m_id", M_NAME "m_name", M_POINT "m_point", m_grade "m_grade" 
+		FROM MINFO WHERE
+		<if test="search != ''">
+			 ${cName}=#{search} AND
+		</if>
+		ROWNUM = 1
+	</select>
+	
+	<select id="test_params" resultType="Map">
+		SELECT M_ID "m_id", M_NAME "m_name", M_POINT "m_point", m_grade "m_grade" 
+		FROM MINFO WHERE
+		<if test="param2 != null">
+			 ${cName}=#{search} AND
+		</if>
+		ROWNUM = 1
+	</select>
+	
 </mapper>

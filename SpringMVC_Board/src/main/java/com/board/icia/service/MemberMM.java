@@ -1,5 +1,9 @@
 package com.board.icia.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -53,5 +57,14 @@ public class MemberMM {
 		return "사용할 수 있는 아이디";
 	}
 
+	public List<Map<String, Object>> test_map(HashMap<String, String> hMap) {
+		List<Map<String,Object>> m_list= mDao.test_map(hMap);
+		return m_list;
+	}
+
+	public List<Map<String, Object>> test_params(String cName, Integer search) {
+		List<Map<String, Object>> m_list=mDao.test_params(cName,search);
+		return m_list;
+	}
 
 }

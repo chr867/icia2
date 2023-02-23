@@ -1,6 +1,9 @@
 package com.board.icia.controller;
 
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.jar.Attributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -113,6 +116,18 @@ public class MemberController {
 		return "join";
 	}
 	
+	@GetMapping("/test-map")
+	public  ModelAndView test_map(@RequestParam HashMap<String,String> hMap) {
+		System.out.println("cName= "+hMap.get("cName"));
+		System.out.println("serach= "+hMap.get("Name"));
+		List<Map<String,Object>>m_list=mm.test_map(hMap);
+		return new ModelAndView("test-map").addObject("m_list",m_list);
+	}
 	
+	@GetMapping("/test-params")
+	public  ModelAndView test_map(String cName, Integer search) {
+		List<Map<String,Object>>m_list=mm.test_params(cName,search);
+		return new ModelAndView("test-map").addObject("m_list",m_list);
+	}
 	
 }

@@ -1,6 +1,7 @@
 package com.board.icia.controller;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -116,9 +117,9 @@ public class BoardController {
 
 		List<Integer> numbering=bDao.get_numbering();
 		Collections.reverse(numbering);
-//		for(int number : numbering) {
-//			System.out.println(number);
-//		}		
+		for(int number : numbering) {
+			System.out.println(number);
+		}		
 				
 //		Iterator<BoardDto> board_iterator=bList.iterator();
 //		Iterator<Integer> numbering_iterator=numbering.iterator();
@@ -162,4 +163,8 @@ public class BoardController {
 		}
 		return mav;
 	}
+	
+
+	
+	
 }

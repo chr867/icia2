@@ -94,5 +94,4 @@
 		INSERT INTO BF VALUES(BF_SEQ.NEXTVAL, #{bnum}, #{origFileName}, #{sysFileName})
 	</insert>
 	
-	
 </mapper>

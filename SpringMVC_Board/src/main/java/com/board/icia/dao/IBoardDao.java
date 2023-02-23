@@ -1,5 +1,6 @@
 package com.board.icia.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +52,5 @@ public interface IBoardDao {
 
 	@Select("SELECT ROWNUM,B.* FROM B ORDER BY B_NUM ASC")
 	List<Integer> get_numbering();
-
 
 }

@@ -37,10 +37,10 @@
 	
 	<!-- 인터셉터를 이용해서 로그인 여부 판단 -->
 	
-	<interceptors> 
+<!-- 	<interceptors> 
 		<interceptor>
-			<mapping path="/**"/> <!-- URL 경로가 다단일때 ** -->
-			<!-- 예외처리(요청을 가로채지 않음) -->
+			<mapping path="/**"/> URL 경로가 다단일때 **
+			예외처리(요청을 가로채지 않음)
 			<exclude-mapping path="/member/"/>
 			<exclude-mapping path="/member/access"/>
 			<exclude-mapping path="/member/join"/>
@@ -51,7 +51,7 @@
 			<beans:bean class="com.board.icia.userClass.SessionInterCeptor"/>
 		</interceptor>
 		
-	</interceptors>
+	</interceptors> -->
 		
 	
 	

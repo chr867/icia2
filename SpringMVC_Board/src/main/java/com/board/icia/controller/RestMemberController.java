@@ -2,12 +2,18 @@ package com.board.icia.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.board.icia.dto.MemberDto;
 import com.board.icia.service.MemberMM;
 
 @RestController //@ResponseBody 생략 가능
@@ -35,4 +41,37 @@ public class RestMemberController {
 				// "text/plain;charset=utf-8"
 				// consumes, produces는 문제없으면 생략가능함
 	}
+	
+//	@GetMapping(value="/rest-test",produces = "text/plain;charset=utf-8")
+//	public String rest_test(MemberDto mb) {
+	@GetMapping("/rest-test")
+	public MemberDto rest_test(MemberDto mb) {
+		System.out.println("MIME TYPE: "+ MediaType.APPLICATION_JSON_VALUE);
+		System.out.println("MIME TYPE: "+ MediaType.TEXT_PLAIN_VALUE);
+		System.out.println("MIME TYPE: "+ MediaType.APPLICATION_JSON_UTF8_VALUE);
+		System.out.println("MIME TYPE: "+ MediaType.APPLICATION_XML_VALUE);
+//		Service->DB
+		return mb; //jackson(메세지 컨버터)에서 json으로 변환
+	}
+	
+	@PostMapping(value="/post", produces = "application/json;charset=utf-8")
+	public String[] post(Integer num) {
+		return new String[] {"insert result:"+num};
+	}
+
+	@DeleteMapping(value="/delete", produces = "application/json;charset=utf-8")
+	public String[] delete(Integer num) {
+		return new String[] {"insert result:"+num};
+	}
+	
+	@PutMapping(value="/put", produces = "application/json;charset=utf-8")
+	public String[] put(Integer num) {
+		return new String[] {"insert result:"+num};
+	}
+	
+	@PatchMapping(value="/patch", produces = "application/json;charset=utf-8")
+	public String[] patch(Integer num) {
+		return new String[] {"insert result:"+num};
+	}
+	
 }

@@ -106,6 +106,12 @@
 		</div>
 	</div>
 	<!-- Modal End -->
+	<form action="/member/test-params">
+		컬럼명: <input type='text' name=cName> <br>
+		검색: <input type='text' name=search>
+		<button>검색</button>
+	</form>
+	
 	
 <script type="text/javascript">
 	if('${err_msg}'!=''){
