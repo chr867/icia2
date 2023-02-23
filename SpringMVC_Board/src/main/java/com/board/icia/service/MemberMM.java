@@ -46,5 +46,11 @@ public class MemberMM {
 		return mDao.join(mb);
 	}
 
+	public boolean id_avaliable(String m_id) {
+		MemberDto mb=mDao.getMemberInfo(m_id);
+		if(mb!=null) return false;
+		return true;
+	}
+
 
 }

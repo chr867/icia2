@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<h1>joinFrm.jsp--회원가입 양식</h1>
@@ -16,7 +19,11 @@
 			</tr>
 			<tr>
 				<td width="100">ID</td>
-				<td><input type="text" id="id" name="m_id"></td>
+				<td>
+					<input type="text" id="id" name="m_id">
+					<input type="button" id="check_id" value="중복검사">
+					<span id="result"></span>
+				</td>
 			</tr>
 			<tr>
 				<td width="100">PW</td>
@@ -61,6 +68,25 @@
 	}
 	 return true; //성공시 서버 전송
 	}
+	
+	$('#check_id').on('click',function(){
+		if($('#id').val() != ''){
+			$.ajax({
+				method : 'get',
+				url: '/member/userid', //대/중/소 (가능하면 명사)
+				data: {m_id : $('#id').val()},
+				dataType : 'html',
+			}).done((res,status,xhr)=>{
+				console.log(res)
+				console.log(status)
+				console.log(xhr)
+			}).fail((err,status)=>{
+				console.log(err)
+				console.log(status)
+			})
+		} // if end
+	}) //on end
+	
 	</script>
 </body>
 </html>

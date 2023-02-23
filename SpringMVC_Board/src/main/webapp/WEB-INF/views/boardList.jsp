@@ -61,7 +61,7 @@
 		</tr>
 		<c:forEach var="board" items="${bList}">
 			<tr height="25">
-				<td align="center" id="b_num" ></td>
+				<td align="center" id="b_num" >${board.b_num}</td>
 				<!-- href="#" 페이지 맨위로 이동뒤 이벤트 발생
 				     href="#;" 페이지 현재위치에서 이벤트 발생 -->
 				<td align="center"><a href="#" data-bs-toggle="modal"
@@ -135,6 +135,15 @@
 		})
 	}
 		
+	$(()=>{		
+		let delete_b_num='${b_num}'
+		if(delete_b_num==''){
+			return 
+		}else if(parseInt(delete_b_num)>0){
+			alert('${b_num}'+'번 글 삭제 완료')
+		}
+	})
+
 	/* $(()=>{
 		$.ajax({
 			url:'/board/list',

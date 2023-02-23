@@ -45,6 +45,7 @@
 			<exclude-mapping path="/member/access"/>
 			<exclude-mapping path="/member/join"/>
 			<exclude-mapping path="/board/list"/>
+			<exclude-mapping path="/member/userid"/>
 			<exclude-mapping path="/board/write"/>
 			<exclude-mapping path="/resources/**"/>
 			<beans:bean class="com.board.icia.userClass.SessionInterCeptor"/>
