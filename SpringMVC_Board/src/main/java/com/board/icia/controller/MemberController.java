@@ -1,17 +1,14 @@
 package com.board.icia.controller;
 
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.jar.Attributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,9 +84,9 @@ public class MemberController {
 		  //attr.addAttribute("msg", "login OK!!!"); //여러번사용가능
 		  //session영역에 저장한뒤 한번 사용하고 삭제
 		  //attr.addFlashAttribute("msg", "login OK!!!"); //한번만 사용가능
-		 // attr.addFlashAttribute("check", "1"); //한번만 사용가능
+		  //attr.addFlashAttribute("check", "1"); //한번만 사용가능
 		  //Redirect 시 새로운 request객체에 속성값을 저장한다.
-//	  attr.addFlashAttribute("member",member);
+		  //attr.addFlashAttribute("member",member);
 	  //get방식만 가능
 		  
 //		  ObjectMapper objMapper=new ObjectMapper();

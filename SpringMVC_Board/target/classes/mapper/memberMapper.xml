@@ -34,7 +34,7 @@
 	<select id="test_params" resultType="Map">
 		SELECT M_ID "m_id", M_NAME "m_name", M_POINT "m_point", m_grade "m_grade" 
 		FROM MINFO WHERE
-		<if test="param2 != null">
+		<if test="search != null">
 			 ${cName}=#{search} AND
 		</if>
 		ROWNUM = 1
