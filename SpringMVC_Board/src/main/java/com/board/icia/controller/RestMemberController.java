@@ -28,5 +28,11 @@ public class RestMemberController {
 		
 //		@RestControllerAdvice 를 이용해서 예외처리
 		return ResponseEntity.ok(mm.id_avaliable(m_id));
+		
+		// MediaType.APPLICATION_JSON_VALUE
+				// "application/json;charset=utf-8",
+				// MediaType.TEXT_PLAIN_VALUE
+				// "text/plain;charset=utf-8"
+				// consumes, produces는 문제없으면 생략가능함
 	}
 }

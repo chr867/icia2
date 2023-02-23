@@ -1,6 +1,7 @@
 package com.board.icia.controller;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import com.board.icia.dao.IBoardDao;
 import com.board.icia.dto.BoardDto;
 import com.board.icia.dto.MemberDto;
 import com.board.icia.dto.ReplyDto;
+import com.board.icia.exception.CommonException;
 import com.board.icia.exception.DBException;
 import com.board.icia.service.BoardMM;
 
@@ -105,18 +107,30 @@ public class BoardController {
 		log.info("pnum:{}",pageNum);
 		log.info("member:{}",member);
 //		log.info("json:{}",json);
+		if(pageNum <=0) {
+			throw new CommonException("잘못된 페이지 번호입니다");
+		}
 		List<BoardDto> bList=bm.getBoardList(pageNum);
 		String pageHtml=bm.getPaging(pageNum);
 //		new ModelAndView("boardList").addObject("bList",new Gson().toString(bList));
-		
-//		List<Integer> numbering=bDao.get_numbering();
-//		Collections.reverse(numbering);
+
+		List<Integer> numbering=bDao.get_numbering();
+		Collections.reverse(numbering);
 //		for(int number : numbering) {
 //			System.out.println(number);
 //		}		
-//		for(BoardDto board : bList) {
-//			board.setB_rownum(number);
+				
+//		Iterator<BoardDto> board_iterator=bList.iterator();
+//		Iterator<Integer> numbering_iterator=numbering.iterator();
+//		while(board_iterator.hasNext()) {
+//			if(numbering_iterator.hasNext()) {
+//				board_iterator.next().setB_num(numbering_iterator.next());
+//			}
 //		}
+//		for(BoardDto board:bList) {
+//			System.out.println("board: "+board);
+//		}
+		
 		return new ModelAndView("boardList").addObject("bList",bList)
 			.addObject("member", member) 
 			.addObject("paging",pageHtml);

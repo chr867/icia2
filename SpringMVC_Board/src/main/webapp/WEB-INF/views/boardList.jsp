@@ -31,7 +31,7 @@
 			</form>
 		</div>
 	</c:if>
-
+	
 	<table id="one_table">
 		<tr height="30">
 			<td width="80" bgcolor="pink" align="center">ID</td>
@@ -108,14 +108,15 @@
 	<!-- Modal End -->
 	
 <script type="text/javascript">
-	window.onload=function(){
-	console.log(${numbering})
-	console.log($('#b_num'))
-	${numbering}.forEach(number=>{
-		$('#b_num').html(number)
-		console.log(number)
-	}) 
+	if('${err_msg}'!=''){
+		alert('${err_msg}')
 	}
+	
+	if('${page_num_err}'!=''){
+		alert('${page_num_err}')
+	}
+	
+	
 	function logout() {
 		$('#logoutFrm').submit();
 	}
