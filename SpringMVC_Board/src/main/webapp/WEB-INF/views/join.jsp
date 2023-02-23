@@ -22,7 +22,7 @@
 				<td>
 					<input type="text" id="id" name="m_id">
 					<input type="button" id="check_id" value="중복검사">
-					<span id="result"></span>
+					<p id="result"></p>
 				</td>
 			</tr>
 			<tr>
@@ -80,7 +80,9 @@
 				console.log(res)
 				console.log(status)
 				console.log(xhr)
+				$('#result').html(res).css('color','blue')
 			}).fail((err,status)=>{
+				$('#result').html(err.responseText).css('color','red')
 				console.log(err)
 				console.log(status)
 			})

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.board.icia.dao.IMemberDao;
 import com.board.icia.dto.MemberDto;
+import com.board.icia.exception.InvaildIdException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,10 +47,10 @@ public class MemberMM {
 		return mDao.join(mb);
 	}
 
-	public boolean id_avaliable(String m_id) {
+	public String id_avaliable(String m_id) {
 		MemberDto mb=mDao.getMemberInfo(m_id);
-		if(mb!=null) return false;
-		return true;
+		if(mb!=null) throw new InvaildIdException("사용할 수 없는 아이디.");
+		return "사용할 수 있는 아이디";
 	}
 
 
