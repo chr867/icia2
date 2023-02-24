@@ -1,5 +1,7 @@
 package com.board.icia.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -7,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,5 +76,21 @@ public class RestMemberController {
 	public String[] patch(Integer num) {
 		return new String[] {"insert result:"+num};
 	}
+	
+//	url: "/account/male/1"
+	@GetMapping(value = "/{dept}/{gender}/{num}")
+	public HashMap<String, String> path_variable(@PathVariable String dept,
+												 @PathVariable String gender,
+												 @PathVariable ("num") Integer num){
+		System.out.println("dept: "+dept);
+		System.out.println("gender: "+gender);
+		System.out.println("num: "+num);
+		HashMap<String, String> h_map=new HashMap<String, String>();
+		h_map.put("dept", dept);
+		h_map.put("gender", gender);
+		h_map.put("num", String.valueOf(num)); //num+"
+		return h_map;
+	}
+	
 	
 }
