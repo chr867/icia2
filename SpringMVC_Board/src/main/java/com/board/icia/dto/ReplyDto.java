@@ -1,8 +1,5 @@
 package com.board.icia.dto;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 

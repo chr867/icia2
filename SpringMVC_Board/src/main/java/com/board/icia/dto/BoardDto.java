@@ -6,7 +6,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.board.icia.entity.BoardFile;
 

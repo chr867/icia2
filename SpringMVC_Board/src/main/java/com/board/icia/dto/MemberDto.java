@@ -2,7 +2,6 @@ package com.board.icia.dto;
 
 import org.apache.ibatis.type.Alias;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.Accessors;
