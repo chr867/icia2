@@ -1,6 +1,6 @@
 package com.board.icia.controller;
 
-import java.util.HashMap;
+ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

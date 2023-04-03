@@ -100,20 +100,22 @@ public class BoardController {
 	
 	
 	@GetMapping("/list")
-	public ModelAndView boardList(@RequestParam(defaultValue = "1") Integer pageNum
-			,MemberDto member
-			){
+	public ModelAndView boardList(@RequestParam(defaultValue = "1") Integer pageNum, MemberDto member){
+		
 		log.info("pnum:{}",pageNum);
 		log.info("member:{}",member);
 //		log.info("json:{}",json);
+		
 		if(pageNum <=0) {
 			throw new CommonException("잘못된 페이지 번호입니다");
 		}
+		
 		List<BoardDto> bList=bm.getBoardList(pageNum);
 		String pageHtml=bm.getPaging(pageNum);
 //		new ModelAndView("boardList").addObject("bList",new Gson().toString(bList));
 
 		List<Integer> numbering=bDao.get_numbering();
+
 		Collections.reverse(numbering);
 		for(int number : numbering) {
 			System.out.println(number);

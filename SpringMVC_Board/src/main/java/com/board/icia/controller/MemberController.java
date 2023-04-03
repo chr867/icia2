@@ -26,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
+
 	@Autowired
 	private MemberMM mm;
 	
@@ -86,7 +87,7 @@ public class MemberController {
 
 		  MemberDto member=mm.access(mb); 
 	  
-		  if(member !=null) {	  
+		  if(member != null) {	  
 			  session.setAttribute("id", mb.getM_id());//로그인 마킹
 //			  redirect전 session영역에 저장한 뒤 request객체에 저장후 session영역 삭제 함
 //			  attr.addAttribute("msg", "login OK!!!"); //여러번사용가능
@@ -122,7 +123,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/test-map")
-	public  ModelAndView test_map(@RequestParam HashMap<String,String> hMap) {
+	public  ModelAndView test_map(@RequestParam HashMap<String,String> hMap) {  // annotation 생략 불가
 		
 		System.out.println("cName= "+hMap.get("cName"));
 		System.out.println("serach= "+hMap.get("Name"));

@@ -76,13 +76,13 @@
 				url: '/member/userid', //대/중/소 (가능하면 명사)
 				data: {m_id : $('#id').val()},
 				dataType : 'html',
-			}).done((res,status,xhr)=>{
+			}).done((res, status, xhr) => {
 				console.log(res)
 				console.log(status)
 				console.log(xhr)
-				$('#result').html(res).css('color','blue')
-			}).fail((err,status)=>{
-				$('#result').html(err.responseText).css('color','red')
+				$('#result').html(res).css('color', 'blue')
+			}).fail((err, status)=>{
+				$('#result').html(err.responseText).css('color', 'red')
 				console.log(err)
 				console.log(status)
 			})

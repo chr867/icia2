@@ -52,9 +52,4 @@
 		<exclude-mapping path="/resources/**"/> <beans:bean class="com.board.icia.userClass.SessionInterCeptor"/> 
 		</interceptor> </interceptors> -->
 
-
-
-
-
-
 </beans:beans>
