@@ -129,6 +129,13 @@
 			<version>5.3.20</version>
 		</dependency>
 
+		<!-- Connection Pool : HikariCP > dbcp2(tomcat) -->
+		<dependency>
+		    <groupId>com.zaxxer</groupId>
+		    <artifactId>HikariCP</artifactId>
+		    <version>4.0.3</version>
+		</dependency>
+	
 		<!-- mybatis: db framework -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
