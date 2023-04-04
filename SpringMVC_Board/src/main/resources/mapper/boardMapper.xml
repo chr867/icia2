@@ -25,7 +25,7 @@
 		    ROWNUM RN, B.B_NUM, B.B_TITLE, B.B_ID, B.B_DATE, B.B_VIEWS
 		    FROM B
 		    WHERE ROWNUM<=#{pageNum}*10
-		    )
+		    ) 
 		 WHERE RN>=#{pageNum}*10-9   
 		]]>
 	</select>
@@ -36,62 +36,69 @@
 		ON B.B_NUM=BF.BF_BNUM
 		WHERE B_NUM=#{b_num}
 	</select>
-	
+
 	<resultMap type="board" id="map_for_read">
-		<id column="B_NUM" property="b_num"/>
+		<id column="B_NUM" property="b_num" />
 		<result column="B_TITLE" property="b_title" />
-		<result column="B_CONTENTS" property="b_contents" 
-		javaType="java.lang.String" jdbcType="NCLOB" />
+		<result column="B_CONTENTS" property="b_contents"
+			javaType="java.lang.String" jdbcType="NCLOB" />
 		<result column="B_ID" property="b_id" />
 		<result column="B_DATE" property="b_date" />
 		<result column="B_VIEWS" property="b_views" />
-		<!--  -->	
-		<collection property="bf_list" javaType="java.util.ArrayList" 
-		 resultMap="map_for_board_file" />
+		<!-- -->
+		<collection property="bf_list"
+			javaType="java.util.ArrayList" resultMap="map_for_board_file" />
 	</resultMap>
-		
+
 	<resultMap type="boardfile" id="map_for_board_file">
-		<id column="BF_NUM" property="bf_num"/>
-		<result column="BF_ORIGNAME" property="bf_origname"/>
-		<result column="BF_SYSNAME" property="bf_sysname"/>
+		<id column="BF_NUM" property="bf_num" />
+		<result column="BF_ORIGNAME" property="bf_origname" />
+		<result column="BF_SYSNAME" property="bf_sysname" />
 	</resultMap>
 
 
 	<update id="updateViews" parameterType="Integer">
-		UPDATE BOARD SET B_VIEWS=B_VIEWS+1 where B_NUM=#{b_num}
+		UPDATE BOARD SET
+		B_VIEWS=B_VIEWS+1 where B_NUM=#{b_num}
 	</update>
 
 	<select id="getReplyList" resultType="reply">
 		<!-- SELECT * FROM NEW_RLIST WHERE R_BNUM=#{b_num} -->
-		SELECT R_NUM,R_BNUM, R_CONTENTES, R_ID, TO_CHAR(R_DATE,'YYYY-MM-DD,HH:MI:SS') AS R_DATE
-		FROM R 
+		SELECT R_NUM,R_BNUM, R_CONTENTES, R_ID,
+		TO_CHAR(R_DATE,'YYYY-MM-DD,HH:MI:SS') AS R_DATE
+		FROM R
 		WHERE R_BNUM=#{b_num}
 		ORDER BY R_DATE DESC
 	</select>
-	
+
 	<insert id="reply_insert" parameterType="reply">
-		INSERT INTO REPLY VALUES(REPLY_SEQ.NEXTVAL,#{r_bnum},#{r_contentes},#{r_id},DEFAULT)
+		INSERT INTO REPLY
+		VALUES(REPLY_SEQ.NEXTVAL,#{r_bnum},#{r_contentes},#{r_id},DEFAULT)
 	</insert>
-	
+
 	<insert id="boardWrite" parameterType="board">
-		INSERT INTO BOARD VALUES(B_SEQ.NEXTVAL,#{b_title},#{b_contents},#{b_id},DEFAULT,DEFAULT)
+		INSERT INTO BOARD
+		VALUES(B_SEQ.NEXTVAL,#{b_title},#{b_contents},#{b_id},DEFAULT,DEFAULT)
 	</insert>
-	
-	<!-- useGeneratedKeys="true" 자동증가값을 얻을 수 있다.
-		 keyProperty="b_num"(필드명) 오라클은 생략가능,my-sql은 명시할 것 -->
-	<insert id="boardWriteSelectKey" useGeneratedKeys="true" keyProperty="b_num">
-		INSERT INTO B VALUES(#{b_num},#{b_title},#{b_contents},#{b_id},DEFAULT,DEFAULT)
-	
-		<selectKey keyProperty="b_num" resultType="Integer" order="BEFORE">
-		SELECT B_SEQ.NEXTVAL FROM DUAL
-		</selectKey>	
-<!-- 		<selectKey keyProperty="b_num" resultType="Integer" order="AFTER">
-		SELECT B_NUM FORM BOARD WHERE B_NUM=B_SEQ.CURRVAL
-		</selectKey>	
- -->	</insert>
-	
+
+	<!-- useGeneratedKeys="true" 자동증가값을 얻을 수 있다. keyProperty="b_num"(필드명) 오라클은 
+		생략가능,my-sql은 명시할 것 -->
+	<insert id="boardWriteSelectKey" useGeneratedKeys="true"
+		keyProperty="b_num">
+		INSERT INTO B
+		VALUES(#{b_num},#{b_title},#{b_contents},#{b_id},DEFAULT,DEFAULT)
+
+		<selectKey keyProperty="b_num" resultType="Integer"
+			order="BEFORE">
+			SELECT B_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		<!-- <selectKey keyProperty="b_num" resultType="Integer" order="AFTER"> 
+			SELECT B_NUM FORM BOARD WHERE B_NUM=B_SEQ.CURRVAL </selectKey> -->
+	</insert>
+
 	<insert id="fileInsert" parameterType="Map">
-		INSERT INTO BF VALUES(BF_SEQ.NEXTVAL, #{bnum}, #{origFileName}, #{sysFileName})
+		INSERT INTO BF
+		VALUES(BF_SEQ.NEXTVAL, #{bnum}, #{origFileName}, #{sysFileName})
 	</insert>
-	
+
 </mapper>
