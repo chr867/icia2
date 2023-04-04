@@ -13,16 +13,18 @@ public class ControllerAdviceMVC {
 	
 	@ExceptionHandler(NumberFormatException.class)
 	public String except(NumberFormatException ex,RedirectAttributes attr) {
-		attr.addFlashAttribute("err_msg",ex.getMessage());
+		attr.addFlashAttribute("err_msg", ex.getMessage());
 		System.out.println("err_msg"+ex.getMessage());
 		return "redirect:/board/list";
 	}
 	
 	@ExceptionHandler(CommonException.class)
 	public String except(CommonException ex,RedirectAttributes attr) {
-		attr.addFlashAttribute("page_num_err",ex.getMessage());
+		attr.addFlashAttribute("page_num_err", ex.getMessage());
 		System.out.println("err_msg"+ex.getMessage());
 		return "redirect:/board/list";
 	}
+	
+// 모든 예외를 처리하고 싶다면 Exception.class
 	
 }

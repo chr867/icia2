@@ -36,7 +36,7 @@ public class RestBoardController {
 	//consumes = "application/json;charset=UTF-8" 파라미터 데이터 형식 (한글 깨짐 방지)
 	//produces = "application/json;charset=UTF-8" 리턴 할 데이터 형식 (한글 깨짐 방지)
 	//consumes = "text/plain;charset=UTF-8" 파라미터 데이터 형식 (순수한 텍스트)
-	public HashMap<String, Object> reply_insert(@RequestBody ReplyDto reply,HttpSession session) {
+	public HashMap<String, Object> reply_insert(@RequestBody ReplyDto reply,HttpSession session) {  // JSP Object -> JSON 받을 땐 @RequesyBody 사용
 		log.info(reply.toString());
 		reply.setR_id(session.getAttribute("id").toString());
 		List<ReplyDto> reply_list = bm.reply_insert(reply);

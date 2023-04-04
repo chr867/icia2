@@ -1,4 +1,4 @@
-package com.board.icia.advice;
+ package com.board.icia.advice;
 
 
 import org.springframework.http.HttpHeaders;
@@ -16,7 +16,7 @@ public class ControllerAdvice {
 	@ExceptionHandler(InvaildIdException.class)
 	public ResponseEntity<String> id_dup_exception_handler(InvaildIdException ex) {
 		System.out.println("InvaildIdException Advice");
-		return new ResponseEntity<String>(ex.getMessage(),getHeaders(),HttpStatus.I_AM_A_TEAPOT);
+		return new ResponseEntity<String>(ex.getMessage(), getHeaders(), HttpStatus.I_AM_A_TEAPOT);
 	}
 	
 
