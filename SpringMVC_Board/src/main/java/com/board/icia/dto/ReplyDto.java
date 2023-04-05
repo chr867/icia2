@@ -5,8 +5,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+
+@Builder  // 인스턴스를 만드는 패턴 @AllArgsConstructor 없이 @NoArgsConstructor만 추가하면 에러
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Data
 @Accessors(chain = true)
