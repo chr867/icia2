@@ -16,6 +16,10 @@
 <input type="text" id="chat-input">
 <button onclick="send()">전송</button>
 
+<div>
+	<div id="box" style="width: 300px; height: 300px; border: 1px solid black"></div>
+</div>
+
 
 <script>
 
@@ -48,6 +52,10 @@
 	
 	function onMessage(evt) {
 		console.log(evt.data);
+
+		receive_msg = document.createElement('div');
+		receive_msg.innerText = evt.data;
+		document.querySelector("#box").append(receive_msg);
 	}
 	
 	
@@ -62,6 +70,7 @@
 		}
 		
 		socket.send(text);
+		
 		document.querySelector("#chat-input").value = ""
 	}
 </script>
